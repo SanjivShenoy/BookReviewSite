@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Registration{% endblock %}
+{% block link %}<link rel="stylesheet" href="{{url_for('static', filename='css/registration.css')}}">{% endblock %}
+
+{% block body%}
+<h1> Registration </h1>
+<form class="form-group" action="{{url_for('success')}}" method="post">
+    <input class="form-control" type="text" name="nick" placeholder="Nick Name">
+    <p></p>
+    <input class="form-control" type="text" name="name" placeholder="Name">
+    <p></p>
+    <input class="form-control" type="password" name="password" placeholder="Password">
+    <p></p>
+    <button class="btn btn-primary">Register</button>
+</form>
+
+{% if check == 0 %}
+<h4>Remember name must contain atleast one alphabet and password must contain atleast one alphanumeric character!</h4>
+{% endif %}
+
+{% if check == -1 %}
+<h4>This username already exists. Try with a different one.</h4>
+{% endif %}
+
+{% endblock %}

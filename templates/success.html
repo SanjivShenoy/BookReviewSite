@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}Success!{% endblock %}
+{% block link %}<link rel="stylesheet" href="success.css">{% endblock %}
+
+{% block body%}
+<h1>Success!</h1>
+
+<h2>Congratulations! You have registered successfully!</h2>
+
+<form action="{{url_for('signin')}}" method="post">
+    <button class="btn btn-primary">Sign In</button>
+</form>
+
+{% if nonick==True %}
+<h4>Sorry, no nick has been created for you since you didn't add any.</h4>
+{% endif %}
+
+{% endblock %}

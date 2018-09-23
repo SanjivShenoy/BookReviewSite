@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}Book Details{% endblock %}
+{% block link %}<link rel="stylesheet" href="book.css">{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-6">
+        <h1>Book Details:</h1>
+        <ul>
+            <li>Title: {{book.title}}</li>
+            <li>Author: {{book.author}}</li>
+            <li>Publication Year: {{book.year}}</li>
+            <li>ISBN: {{book.isbn}}</li>
+        </ul>
+    </div>
+
+    <div class="col-6">
+        <form action="{{url_for('exit')}}">
+            <button class="btn btn-primary" name="logout" style="margin:20px;">Log out</button>
+        </form>
+    </div>
+</div>
+
+
+<h2>Reviews:</h2>
+<div class="row">
+    <div class="col-6">
+        <ol>
+            {% for review in reviews %}
+            <li>{{review.review}}</li>
+            {% else %}
+            <li>No Reviews Yet.</li>
+            {% endfor %}
+
+        </ol>
+    </div>
+    <div class="col-6">
+        <ul>
+            {% for review in reviews %}
+            <li>{{review.stars}} Star(s)</li>
+            {% else %}
+            <li>No Rating Yet</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+<div style="margin-top:20px;">
+
+<form class="" action="{{url_for('update', book_id=book.id)}}" method="post">
+    <h2>Write a Review:</h2>
+    <div class="form-group">
+        <textarea name="review" rows="8" cols="80" placeholder="Write a Review"></textarea>
+    </div>
+
+    <div class="form-group">
+        Rate:
+        <input type="radio" name="stars" value="1">1 star
+        <input type="radio" name="stars" value="2">2 stars
+        <input type="radio" name="stars" value="3">3 stars
+        <input type="radio" name="stars" value="4">4 stars
+        <input type="radio" name="stars" value="5">5 stars
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Submit Review!</button>
+    </div>
+</form>
+
+</div>
+{% if reviewdone == True %}
+<h4>Sorry, you can review a book only once. </h4>
+{% endif %}
+{% endblock %}
